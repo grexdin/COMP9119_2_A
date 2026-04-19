@@ -11,8 +11,10 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                // Builds the image and tags it with both the build number and 'latest'
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
+                // Change into the fast-app directory before building
+                dir('fast-app') {
+                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
+                }
             }
         }
 
